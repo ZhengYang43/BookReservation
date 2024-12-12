@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Book List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Currently Checked Out</th>
+                <th>Number of Times Checked Out</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.currently_checked_out }}</td>
+                <td>{{ book.number_of_times_checked_out }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination">
+        {% if books.has_previous %}
+            <a href="?page={{ books.previous_page_number }}">Previous</a>
+        {% endif %}
+        <span>Page {{ books.number }} of {{ books.paginator.num_pages }}</span>
+        {% if books.has_next %}
+            <a href="?page={{ books.next_page_number }}">Next</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

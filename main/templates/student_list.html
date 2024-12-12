@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Student List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Major</th>
+                <th>Year</th>
+                <th>GPA</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.first_name }}</td>
+                <td>{{ student.last_name }}</td>
+                <td>{{ student.major }}</td>
+                <td>{{ student.year }}</td>
+                <td>{{ student.gpa }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination">
+        {% if students.has_previous %}
+            <a href="?page={{ students.previous_page_number }}">Previous</a>
+        {% endif %}
+        <span>Page {{ students.number }} of {{ students.paginator.num_pages }}</span>
+        {% if students.has_next %}
+            <a href="?page={{ students.next_page_number }}">Next</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
